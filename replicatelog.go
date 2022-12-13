@@ -256,7 +256,7 @@ func (rf *Raft) commitLogEntries() {
 		}
 	}
 	maxReady += 1
-	rf.Info("commitLength: %d", maxReady)
+	rf.DebugWithType(ReplicateLogType, "commitLength: %d", maxReady)
 	if maxReady != 0 && maxReady > rf.commitLength && rf.getTermByLogIndex(maxReady-1) == rf.currentTerm {
 		for i := rf.commitLength; i <= maxReady-1; i++ {
 			msg := ApplyMsg{
